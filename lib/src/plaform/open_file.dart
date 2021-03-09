@@ -58,4 +58,10 @@ class OpenFile {
     final resultMap = json.decode(_result) as Map<String, dynamic>;
     return OpenResult.fromJson(resultMap);
   }
+
+  static Future<Null> close() async {
+    if (Platform.isIOS) {
+      await _channel.invokeMethod('close_file');
+    }
+  }
 }
